@@ -14,12 +14,12 @@ export default function App() {
   const getKey = async () => {
     try {
       const value = await AsyncStorage.getItem("@storage_Key");
-      if (value !== null) {
-        fetchData(value);
-      } else {
-        await AsyncStorage.setItem("@storage_Key", "1");
-        fetchData("1");
-      }
+      // if (value !== null) {
+      //   fetchData(value);
+      // } else {
+      await AsyncStorage.setItem("@storage_Key", "1");
+      fetchData("1");
+      // }
     } catch (e) {
       console.info("err: getting key", e);
     }
@@ -45,20 +45,21 @@ export default function App() {
     getKey();
   }, []);
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Player"
-          component={Player}
-          initialParams={{ data: data }}
-        />
-        <Stack.Screen
-          name="Score"
-          component={Score}
-          initialParams={{ total: total, data: data }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  if (data.length > 0)
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Score"
+            component={Score}
+            initialParams={{ total: total, data: data }}
+          />
+          <Stack.Screen
+            name="Player"
+            component={Player}
+            initialParams={{ data: data }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
 }

@@ -1,5 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { Youtube } from "../../components";
+import { useEffect, useState } from "react";
 
 interface PropsType {
   navigation: any;
@@ -7,11 +8,16 @@ interface PropsType {
 }
 
 const Player = ({ navigation, route }: PropsType) => {
-  const { data } = route.params;
-  const { item } = data;
+  const { data, level } = route.params;
+  const [source, setSource] = useState("");
+
+  useEffect(() => {
+    setSource(data.find((item: any) => item.id === level).sources);
+  }, [data, level]);
+
   return (
     <View style={styles.container}>
-      <Youtube navigation={navigation} />
+      <Youtube navigation={navigation} sources={source} />
     </View>
   );
 };

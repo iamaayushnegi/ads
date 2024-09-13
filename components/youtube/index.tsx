@@ -1,22 +1,19 @@
 import { Button, StyleSheet, Text, View } from "react-native";
+import VideoPlayerScreen from "../video-player";
 
 interface PropsType {
   navigation: any;
+  sources: string;
+  description?: string;
 }
 
-const Youtube = ({ navigation }: PropsType) => {
+const Youtube = ({ navigation, sources, description }: PropsType) => {
+  if (!sources) {
+    return null;
+  }
   return (
     <View style={styles.container}>
-      <Text>Youtube</Text>
-      <View style={styles.buttonContainer}>
-        <Button title="Pause"></Button>
-        <Button title="Next"></Button>
-        <Button title="Volume"></Button>
-        <Button
-          onPress={() => navigation.navigate("Score")}
-          title="Skip"
-        ></Button>
-      </View>
+      <VideoPlayerScreen videoSource={sources} navigation={navigation} />
     </View>
   );
 };
@@ -29,11 +26,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  },
-  buttonContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
 });

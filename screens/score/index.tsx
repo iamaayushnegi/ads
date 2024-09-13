@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface PropsType {
   navigation: any;
@@ -10,9 +10,11 @@ const Score = ({ navigation, route }: PropsType) => {
 
   const renderLevels = (item: any) => {
     return (
-      <View>
+      <View key={item}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Player", { data: data })}
+          onPress={() =>
+            navigation.navigate("Player", { data: data, level: item })
+          }
         >
           <Text>{item}</Text>
         </TouchableOpacity>
