@@ -3,9 +3,12 @@ import { Youtube } from "../../components";
 
 interface PropsType {
   navigation: any;
+  route: any;
 }
 
-const Player = ({ navigation }: PropsType) => {
+const Player = ({ navigation, route }: PropsType) => {
+  const { data } = route.params;
+  const { item } = data;
   return (
     <View style={styles.container}>
       <Youtube navigation={navigation} />

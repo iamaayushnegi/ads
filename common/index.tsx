@@ -1,5 +1,3 @@
-import Config from "react-native-config";
-
 interface PropType {
   endpoint: string;
   method: string;
@@ -14,7 +12,7 @@ export const commonApi = async ({
   body,
 }: PropType) => {
   try {
-    const resp = await fetch(Config.REACT_ENDPOINT + endpoint, {
+    const resp = await fetch(process.env.EXPO_PUBLIC_API_URL + endpoint, {
       method,
       headers: {
         "Content-Type": "application/json",
